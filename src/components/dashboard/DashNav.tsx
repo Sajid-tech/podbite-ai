@@ -1,16 +1,12 @@
 "use client";
 import React from "react";
-
+import ProfileDropdown from "../common/ProfileDropdown";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 import Image from "next/image";
 import Link from "next/link";
-import ProfileDropdown from "../common/ProfileDropdown";
-
-
-
 
 export default async function DashNav({
-    user,
+  user,
   userCoins,
 }: {
   user: CustomUser;
