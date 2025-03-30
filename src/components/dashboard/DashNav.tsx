@@ -1,11 +1,10 @@
-"use client";
 import React from "react";
 import ProfileDropdown from "../common/ProfileDropdown";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function DashNav({
+export default function DashNav({
   user,
   userCoins,
 }: {
@@ -13,7 +12,7 @@ export default async function DashNav({
   userCoins: CoinsType | null;
 }) {
   return (
-    <nav className="w-full flex justify-between items-center h-12 p-2">
+    <nav className="w-full  flex justify-between items-center h-12 p-2">
       <Link href="/">
         <div className="flex items-center space-x-2">
           <Image src="/images/icon_192.png" width={40} height={40} alt="lgo" />

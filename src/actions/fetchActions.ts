@@ -18,3 +18,12 @@ export const getUserCoins = unstable_cache(
     {revalidate:60*60 , tags:["userCoins"]}
 )
 
+
+export const getSummary = async (id:string)=>{
+    const  summary = await prisma.summary.findUnique({
+        where:{
+            id:id
+        },
+    })
+    return summary
+}

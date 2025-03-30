@@ -1,3 +1,4 @@
+
 import DashNav from "@/components/dashboard/DashNav";
 import React from "react";
 import { authOptions, CustomSession } from "../api/auth/[...nextauth]/options";
@@ -11,7 +12,7 @@ export default async function dashboard() {
   // const oldSummaries = await getUserOldSummaries(Number(session?.user?.id!));
   const userCoins = await getUserCoins(session?.user?.id!);
   return (
-    <div className="container">
+    <div className="container mx-auto">
       <DashNav user={session?.user!} userCoins={userCoins} />
       <UrlInput user={session?.user!} />
 

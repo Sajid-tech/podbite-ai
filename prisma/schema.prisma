@@ -42,6 +42,7 @@ model Summary {
   CoinSpend  CoinSpend[]
 
   @@map("summary")
+  @@index([url,created_at])
 }
 
 model Transactions {
