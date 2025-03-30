@@ -190,16 +190,7 @@ export default function Navbar({user}:{user?:CustomUser}) {
                 Testimonials
               </Link>
               
-              <Link 
-                href="/dashboard" 
-                className="flex items-center px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center mr-3">
-                  <Bookmark className="w-4 h-4 text-purple-500" />
-                </div>
-                My Dashboard
-              </Link>
+             
             </div>
 
             <div className="flex space-x-4">
