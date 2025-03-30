@@ -6,17 +6,21 @@ import Navbar from "@/components/landing/Navbar";
 import Pricing from "@/components/landing/Pricing";
 import Testimonials from "@/components/landing/Testimonials";
 import React from "react";
+import { authOptions, CustomSession } from "./api/auth/[...nextauth]/options";
+import { getServerSession } from "next-auth";
 
 
-export default function LandingPage() {
+export default async function Home() {
+  const session: CustomSession | null = await getServerSession(authOptions)
   return (
     <div className="bg-white text-gray-900 min-h-screen">
-      <Navbar />
+      {/* <p>{JSON.stringify(session)}</p> */}
+      <Navbar user={session?.user} />
       <main>
         <HeroSection />
         <FeaturesSection />
         <HowItWorks />
-        <Pricing />
+        <Pricing user={session?.user} />
         <Testimonials />
       </main>
       <Footer />

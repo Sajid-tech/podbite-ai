@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import LoginModal from "../auth/LoginModal";
 import Link from "next/link";
 import { Home, Search, Bookmark, User, X, ChevronUp, Star, Menu, Zap } from "lucide-react";
+import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 
-export default function Navbar() {
+export default function Navbar({user}:{user?:CustomUser}) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -16,7 +17,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
       
-      // Hide/show floating nav on scroll
+     
       if (window.scrollY > lastScrollY && window.scrollY > 100) {
         setHidden(true);
       } else {
@@ -41,7 +42,7 @@ export default function Navbar() {
                   src="/images/icon_192.png" 
                   alt="PodBite Logo"
                   fill
-                  className="object-contain"
+                  className="object-contain "
                 />
               </div>
               <h1 className={`text-2xl font-bold tracking-tight ${scrolled ? "bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent" : "text-white"}`}>
@@ -65,15 +66,18 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <Link href="/dashboard">
+              {user ? (  <Link href="/dashboard">
                 <Button 
                   variant={scrolled ? "outline" : "ghost"} 
                   className={`${scrolled ? "border-gray-300 text-gray-800 hover:bg-gray-50" : "text-white hover:bg-white/10"}`}
                 >
                   Dashboard
                 </Button>
-              </Link>
-              <LoginModal variant={scrolled ? "default" : "outline"} />
+              </Link>):(
+  <LoginModal variant={scrolled ? "default" : "outline"} />
+              )}
+            
+            
             </div>
           </div>
         </div>
@@ -199,12 +203,16 @@ export default function Navbar() {
             </div>
 
             <div className="flex space-x-4">
-              <Link href="/dashboard" className="flex-1">
+              {user ? ( <Link href="/dashboard" className="flex-1">
                 <Button variant="outline" className="w-full">
                   Dashboard
                 </Button>
-              </Link>
-              <LoginModal variant="default" />
+              </Link>):(
+ <LoginModal variant="default" />
+
+              )}
+             
+             
             </div>
           </div>
         </div>

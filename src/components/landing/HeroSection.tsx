@@ -1,16 +1,43 @@
+"use client"
+
 import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { PlayCircle, ChevronRight } from "lucide-react";
+import { PlayCircle, ChevronRight, Sparkle } from "lucide-react";
 
 export default function HeroSection() {
   return (
     <section className="relative pt-24 lg:pt-32 pb-20 lg:pb-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden min-h-screen flex items-center">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('/images/grid-white.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+        {/* Pure CSS Grid Pattern with better visibility */}
+        <div className="absolute inset-0 opacity-20">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(255,255,255,0.35) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.35) 1px, transparent 1px)
+              `,
+              backgroundSize: '24px 24px', // Smaller grid cells
+              maskImage: 'linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.1))'
+            }}
+          >
+            {/* Animated stars falling along grid lines */}
+            {[...Array(8)].map((_, i) => (
+              <div 
+                key={i}
+                className="absolute top-0 text-purple-400 opacity-10"
+                style={{
+                  left: `${(i * 12.5) + 6.25}%`,
+                  animation: `falling-star ${3 + (i * 0.5)}s linear infinite`,
+                  animationDelay: `${i * 0.5}s`
+                }}
+              >
+                <Sparkle className="w-3 h-3" />
+              </div>
+            ))}
+          </div>
         </div>
         
         {/* Floating gradient blobs */}
@@ -48,7 +75,7 @@ export default function HeroSection() {
                 </Button>
               </Link>
               <Link href="#how-it-works">
-                <Button variant="outline" className="px-8 py-6 text-lg border-white/30 text-white hover:bg-white/10 hover:text-white transition-all duration-300">
+                <Button variant="outline" className="px-8 py-6 text-lg bg-gray-800 text-white hover:bg-white/10 hover:text-white transition-all duration-300">
                   <PlayCircle className="w-5 h-5 mr-2" />
                   Watch Demo
                 </Button>
@@ -92,15 +119,20 @@ export default function HeroSection() {
         </div>
         
         {/* Trusted by brands - Desktop only */}
-        <div className="mt-20 hidden lg:block">
+        <div className="mt-16 hidden lg:block animate-fade-in delay-500">
           <p className="text-gray-400 text-center mb-6">TRUSTED BY INNOVATORS AT</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-80">
+          <div className="flex flex-wrap justify-center items-center gap-6">
             {['Google', 'Spotify', 'Apple', 'Microsoft', 'Tesla'].map((brand) => (
-              <div key={brand} className="text-2xl font-bold text-white/90">{brand}</div>
+              <div key={brand} className="text-xl font-medium text-white/90 bg-white/5 px-5 py-2.5 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                {brand}
+              </div>
             ))}
           </div>
         </div>
       </div>
+
+    
+      
     </section>
   );
 }

@@ -20,7 +20,7 @@ export default function LoginModal({ variant = "outline" }: LoginModalProps) {
   const handleGoogleLogin = async () => {
     signIn("google", {
       redirect: true,
-      callbackUrl: "/dashboard",
+      callbackUrl: "/",
     });
   };
 
