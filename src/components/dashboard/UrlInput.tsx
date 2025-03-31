@@ -7,6 +7,7 @@ import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 export default function UrlInput({ user }: { user: CustomUser | null }) {
   const router = useRouter();
@@ -89,7 +90,7 @@ export default function UrlInput({ user }: { user: CustomUser | null }) {
           <input
             type="url"
             className="w-full h-14 pl-10 pr-36 rounded-xl bg-white border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all shadow-sm hover:shadow-md text-lg"
-            placeholder="Paste Spotify, Apple, YouTube, or RSS link..."
+            placeholder="Paste YouTube link"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             disabled={loading}
@@ -105,7 +106,12 @@ export default function UrlInput({ user }: { user: CustomUser | null }) {
             whileHover={!loading && url ? { scale: 1.05 } : {}}
             whileTap={!loading && url ? { scale: 0.95 } : {}}
           >
-            {loading ? <Loading  /> : "Summarize Now"}
+            {loading ? <Loading  /> : 
+            <>
+             <span className="hidden sm:inline">Summarize Now</span>
+             <ArrowRight className="sm:hidden h-5 w-5" />
+             </>
+            }
           </motion.button>
         </div>
         {error?.url && (
@@ -119,29 +125,7 @@ export default function UrlInput({ user }: { user: CustomUser | null }) {
         )}
       </motion.form>
 
-      <motion.div
-        className="mt-8 flex flex-wrap justify-center gap-3 max-w-2xl mx-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-      >
-        <span className="text-sm text-gray-500">Popular platforms:</span>
-        {["Spotify", "Apple Podcasts", "YouTube", "Google Podcasts"].map(
-          (platform) => (
-            <motion.span
-              key={platform}
-              className="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-200 cursor-pointer transition-colors"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                setUrl(`https://${platform.toLowerCase().replace(" ", "")}.com`)
-              }
-            >
-              {platform}
-            </motion.span>
-          )
-        )}
-      </motion.div>
+     
 
       <motion.div
         className="mt-12 max-w-4xl mx-auto grid md:grid-cols-3 gap-6"
