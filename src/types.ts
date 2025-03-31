@@ -13,5 +13,13 @@ type SummaryType ={
     title: string;
     id: string;
     created_at: Date;
-    response: string | null;
+    response?: string | null;
 }
+
+type UserSummaries = {
+    id: string;
+    url: string;
+    response?: string | null;
+    title?: string | null;
+    created_at: Date;
+  };
