@@ -1,4 +1,4 @@
-# PodBite AI - Detailed README
+# PodBite AI 
 
 ## Overview
 
